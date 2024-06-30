@@ -1,0 +1,38 @@
+SYS			:=	$(shell gcc -dumpmachine)
+CC			=	g++
+#CC			=	clang++
+
+TARGET		=	wssclient
+SOURCES		= build_number/BuildNumber.cpp \
+		main.cpp \
+
+######################################## include
+INCLUDE	=  -I../../ -I../../../
+LDFLAGS += -L../../libs -lhttp1_reactor -lweb_socket -lreactor -ltcp_async_client
+LDFLAGS += -L../../../abc -labc
+
+######################################## default
+LDFLAGS += -lrt -lpthread
+
+CPPFLAGS += -g -D_REENTRANT
+CPPFLAGS += -O2 -std=c++17 -Wall -Wextra -Wfloat-equal -m64
+
+OBJECTS		:=	$(SOURCES:.cpp=.o)
+
+all: $(OBJECTS)
+	rm -rf core.*
+#	ar rcv $(TARGET) $(OBJECTS)
+	$(CC) -o $(TARGET) $(OBJECTS) $(CPPFLAGS) $(LDFLAGS)
+
+clean:
+	rm -rf $(TARGET) $(OBJECTS)
+
+install: all
+	rm -rf $(INSTALL_DIR)/$(TARGET).bak
+	mv $(INSTALL_DIR)/$(TARGET) $(INSTALL_DIR)/$(TARGET).bak
+	cp $(TARGET) $(INSTALL_DIR)
+
+.c.o: $(.cpp.o)
+.cpp.o:
+	$(CC) $(INCLUDE) $(CPPFLAGS) -c $< -o $@
+
