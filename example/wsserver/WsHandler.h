@@ -9,7 +9,6 @@
 #define WSHANDLER_H_
 
 #include <http1_reactor/http1_reactor.h>
-#include <abc/logger/Logger.h>
 
 using namespace https_reactor;
 
@@ -17,7 +16,7 @@ class WsHandler : public Http1Handler
 {
 public:
   WsHandler(const sockaddr_storage &client_addr) : Http1Handler(client_addr) {}
-  virtual ~WsHandler() { D_LOG; }
+  virtual ~WsHandler() { reactor_trace; }
 
 protected: // method
   void  handle_registered ();

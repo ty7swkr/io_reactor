@@ -5,7 +5,7 @@ using namespace https_reactor;
 void
 WsHandler::handle_registered()
 {
-  I_LOG << this->peer();
+  reactor_trace << this->peer();
 }
 
 void
@@ -36,7 +36,7 @@ WsHandler::handle_request(const Http1Request &request)
 void
 WsHandler::handle_timeout(const int64_t &timer_key)
 {
-  I_LOG << "timeout session." << "send PING" << timer_key;
+  reactor_trace << "timeout session." << "send PING" << timer_key;
   this->send(WebSocket::make_ping(false));
   this->set_timeout(10000);
 }
@@ -44,38 +44,38 @@ WsHandler::handle_timeout(const int64_t &timer_key)
 void
 WsHandler::handle_sent(const Http1Response &response)
 {
-  D_LOG << response.packet();
+  reactor_trace << response.packet();
 }
 
 void
 WsHandler::handle_request(const std::deque<WebSocket> &requests)
 {
-  I_LOG << "requests" << requests.size();
+  reactor_trace << "requests" << requests.size();
   for (const auto &request : requests)
   {
-    I_LOG << request.to_string();
+    reactor_trace << request.to_string();
 
     if (request.is_ping() == true || request.is_pong() == true)
     {
       if (request.is_pong() == true)
       {
-        I_LOG << "recvied PONG";
+        reactor_trace << "recvied PONG";
         return;
       }
 
-      I_LOG << "recvied PING" << requests.size();
+      reactor_trace << "recvied PING" << requests.size();
       this->send(WebSocket::make_pong());
       continue;
     }
 
     if (request.is_close() == true)
     {
-      I_LOG << "will be closed";
+      reactor_trace << "will be closed";
       this->close();
       return;
     }
 
-    I_LOG << request.payload_to_string();
+    reactor_trace << request.payload_to_string();
     this->send(WebSocket::make(request.payload_to_string()));
   }
 }
@@ -85,22 +85,22 @@ WsHandler::handle_sent(const WebSocket &response)
 {
   if (response.is_pong() == true)
   {
-    I_LOG << "sent PONG";
+    reactor_trace << "sent PONG";
     return;
   }
 
-  I_LOG << response.payload_to_string();
+  reactor_trace << response.payload_to_string();
 }
 
 void
 WsHandler::handle_close()
 {
-  I_LOG << "closed";
+  reactor_trace << "closed";
 }
 
 void
 WsHandler::handle_removed()
 {
-  I_LOG << "removed";
+  reactor_trace << "removed";
 }
 
