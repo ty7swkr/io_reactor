@@ -9,7 +9,7 @@
 - CentOS 7이상, Ubuntu 18이상
 - OpenSSL 1.0.x or 1.1.x
 
-## 디렉토리 설명
+## 디렉토리
 - http1_client      : HTTP 1.1 클라이언트 프레임웍
 - http1_protocol    : HTTP 파서&빌더
 - http1_reactor     : HTTP 1.1 비보안 멀티쓰레드 Async 서버 프레임웍
