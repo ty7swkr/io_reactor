@@ -6,7 +6,7 @@
 
 ## 요구사항
 - g++ - c++ 17지원되는 컴파일러
-- CentOS 7, Ubuntu 18이상
+- CentOS 7이상, Ubuntu 18이상
 - OpenSSL 1.0.x or 1.1.x
 
 ## 디렉토리 설명
