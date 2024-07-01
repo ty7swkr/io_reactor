@@ -22,57 +22,57 @@ public:
     return TcpAsyncClient::connect("localhost", 2000, 1000);
   }
 
-  void  on_connect()
+  void  handle_connect()
   {
     reactor_trace << this->io_handle();
     reactor_trace << "on_connect" << this->send(stream_id_++, "test", strlen("test"));
   }
 
-  void  on_connect_error(const int &err_no, const std::string &err_str)
+  void  handle_connect_error(const int &err_no, const std::string &err_str)
   {
     reactor_trace << "on_connect_error" << this->is_connect() << err_no << err_str;
   }
 
-  void  on_connect_timeout(const int &err_no, const std::string &err_str)
+  void  handle_connect_timeout(const int &err_no, const std::string &err_str)
   {
     reactor_trace << "on_connect_timeout" << this->is_connect() << err_no << err_str;
   }
 
-  void  on_disconnect()
+  void  handle_disconnect()
   {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     this->connect();
   }
 
-  void  on_recv(const std::vector<uint8_t> &data)
+  void  handle_recv(const std::vector<uint8_t> &data)
   {
     reactor_trace << "on_recv" << data.size() << (const uint8_t *)&(data[0]);
   }
 
-  void  on_sent(const int32_t &stream_id, const uint8_t *data, const size_t &size)
+  void  handle_sent(const int32_t &stream_id, const uint8_t *data, const size_t &size)
   {
     (void)data;
     reactor_trace << "on_sent" << stream_id << size;
   }
 
-  void  on_sent_error     (const int &err_no, const std::string &err_str,
-                           const int32_t &id, const uint8_t *data, const size_t &size)
+  void  handle_sent_error(const int &err_no, const std::string &err_str,
+                          const int32_t &id, const uint8_t *data, const size_t &size)
   {
     (void)data;
     reactor_trace << "on_sent_error" << err_no << err_str << id << data << size;
   }
 
-  void  on_error(const int &err_no, const std::string &err_str)
+  void  handle_error(const int &err_no, const std::string &err_str)
   {
     reactor_trace << "on_error" << this->is_connect() << err_no << err_str;
   }
 
-  void  on_timeout()
+  void  handle_timeout()
   {
     reactor_trace << "on_timeout" ;
   }
 
-  void  on_shutdown()
+  void  handle_shutdown()
   {
     reactor_trace << "on_shutdown" ;
   }

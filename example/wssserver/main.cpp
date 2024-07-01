@@ -192,8 +192,10 @@ int main(void)
   ClientHandlerFactory factory;
 
   reactor_trace;
+  // Acceptor설정. 2000번포트, 리스닝주소, 2쓰레드, backlog값.
   https1_reactor.set_acceptor_ipv46(&factory, 2000, "::0", 2, 1000);
 
+  // Reactor 설정. 4개 쓰레드, 키파일, 리액터당(1쓰레드당) 최대 클라이언트 수, 리액터당(1쓰레드) 1회 최대 이벤트 처리 수.
   reactor_trace << https1_reactor.set_reactor(4, "./server.crt", "./server.key", "", 1000, 100);
   reactor_trace << https1_reactor.start();
 
