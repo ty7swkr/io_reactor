@@ -32,7 +32,6 @@ protected:
     reactor_trace << alpn;
   }
 
-  // Called when data arrives.
   void handle_timeout(const int64_t &timer_key) override
   {
     reactor_trace << timer_key;
@@ -68,7 +67,6 @@ protected:
       this->close();
   }
 
-  // Called by Reactor when the client is disconnected.
   void  handle_sent(const Http1Response &response) override
   {
     reactor_trace << response.packet();
