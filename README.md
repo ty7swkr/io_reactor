@@ -1,6 +1,6 @@
 # 디렉토리 설명
 - http1_client      : HTTP 1.1 클라이언트 프레임웍
-- http1_protocol    : HTTP 파서
+- http1_protocol    : HTTP 파서&빌더
 - http1_reactor     : HTTP 1.1 비보안 멀티쓰레드 Async 서버 프레임웍
 - https1_client     : HTTP 1.1 보안(SSL) Async 클라이언트
 - https1_rector     : HTTP 1.1 보안(SSL) 멀티쓰레드 Async 서버 프레임웍
@@ -8,7 +8,7 @@
 - ssl_reactor       : REACTOR + ACCEPTOR 보안(SSL) TCP/IP 적용 서버 프레임웍
 - tcp_reactor       : REACTOR + ACCEPTOR 비보안    TCP/IP 적용 서버 프레임웍
 - tcp_async_client  : TCP/IP 보안(SSL) 및 비보안 ASYNC Client 프레임웍
-- websocket         : 웹소켓 파서 - 오픈소스 수정.
+- websocket         : 웹소켓 파서&빌더 - 오픈소스 수정.
 - example
   - async_client    : 비동기 기반 TCP/IP ASYNC CLIENT
   - complex         : TCP/IP 서버
